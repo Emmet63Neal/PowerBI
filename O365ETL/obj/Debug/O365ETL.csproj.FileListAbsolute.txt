@@ -1,0 +1,78 @@
+C:\Users\muali\documents\visual studio 2017\Projects\Test0365AuditLogs\O365ETL\bin\Debug\O365ETL.dll
+C:\Users\muali\documents\visual studio 2017\Projects\Test0365AuditLogs\O365ETL\bin\Debug\O365ETL.pdb
+C:\Users\muali\documents\visual studio 2017\Projects\Test0365AuditLogs\O365ETL\bin\Debug\Newtonsoft.Json.dll
+C:\Users\muali\documents\visual studio 2017\Projects\Test0365AuditLogs\O365ETL\bin\Debug\Newtonsoft.Json.xml
+C:\Users\muali\documents\visual studio 2017\Projects\Test0365AuditLogs\O365ETL\obj\Debug\O365ETL.csprojResolveAssemblyReference.cache
+C:\Users\muali\documents\visual studio 2017\Projects\Test0365AuditLogs\O365ETL\obj\Debug\O365ETL.dll
+C:\Users\muali\documents\visual studio 2017\Projects\Test0365AuditLogs\O365ETL\obj\Debug\O365ETL.pdb
+C:\Users\muali\documents\visual studio 2017\Projects\Test0365AuditLogs\O365ETL\bin\Debug\Microsoft.IdentityModel.Clients.ActiveDirectory.dll
+C:\Users\muali\documents\visual studio 2017\Projects\Test0365AuditLogs\O365ETL\bin\Debug\Microsoft.IdentityModel.Clients.ActiveDirectory.Platform.dll
+C:\Users\muali\documents\visual studio 2017\Projects\Test0365AuditLogs\O365ETL\bin\Debug\Microsoft.IdentityModel.Clients.ActiveDirectory.pdb
+C:\Users\muali\documents\visual studio 2017\Projects\Test0365AuditLogs\O365ETL\bin\Debug\Microsoft.IdentityModel.Clients.ActiveDirectory.xml
+C:\Users\muali\documents\visual studio 2017\Projects\Test0365AuditLogs\O365ETL\bin\Debug\Microsoft.IdentityModel.Clients.ActiveDirectory.Platform.pdb
+C:\Users\muali\documents\visual studio 2017\Projects\Test0365AuditLogs\O365ETL\bin\Debug\Microsoft.IdentityModel.Clients.ActiveDirectory.Platform.xml
+E:\Projects_2017\SolutionTemplate\Solutions\o365AuditLogs\Test0365AuditLogs\Test0365AuditLogs\O365ETL\bin\Debug\O365ETL.dll
+E:\Projects_2017\SolutionTemplate\Solutions\o365AuditLogs\Test0365AuditLogs\Test0365AuditLogs\O365ETL\bin\Debug\O365ETL.pdb
+E:\Projects_2017\SolutionTemplate\Solutions\o365AuditLogs\Test0365AuditLogs\Test0365AuditLogs\O365ETL\bin\Debug\Microsoft.IdentityModel.Clients.ActiveDirectory.dll
+E:\Projects_2017\SolutionTemplate\Solutions\o365AuditLogs\Test0365AuditLogs\Test0365AuditLogs\O365ETL\bin\Debug\Microsoft.IdentityModel.Clients.ActiveDirectory.Platform.dll
+E:\Projects_2017\SolutionTemplate\Solutions\o365AuditLogs\Test0365AuditLogs\Test0365AuditLogs\O365ETL\bin\Debug\Newtonsoft.Json.dll
+E:\Projects_2017\SolutionTemplate\Solutions\o365AuditLogs\Test0365AuditLogs\Test0365AuditLogs\O365ETL\bin\Debug\Microsoft.IdentityModel.Clients.ActiveDirectory.pdb
+E:\Projects_2017\SolutionTemplate\Solutions\o365AuditLogs\Test0365AuditLogs\Test0365AuditLogs\O365ETL\bin\Debug\Microsoft.IdentityModel.Clients.ActiveDirectory.xml
+E:\Projects_2017\SolutionTemplate\Solutions\o365AuditLogs\Test0365AuditLogs\Test0365AuditLogs\O365ETL\bin\Debug\Microsoft.IdentityModel.Clients.ActiveDirectory.Platform.pdb
+E:\Projects_2017\SolutionTemplate\Solutions\o365AuditLogs\Test0365AuditLogs\Test0365AuditLogs\O365ETL\bin\Debug\Microsoft.IdentityModel.Clients.ActiveDirectory.Platform.xml
+E:\Projects_2017\SolutionTemplate\Solutions\o365AuditLogs\Test0365AuditLogs\Test0365AuditLogs\O365ETL\bin\Debug\Newtonsoft.Json.xml
+E:\Projects_2017\SolutionTemplate\Solutions\o365AuditLogs\Test0365AuditLogs\Test0365AuditLogs\O365ETL\obj\Debug\O365ETL.csprojResolveAssemblyReference.cache
+E:\Projects_2017\SolutionTemplate\Solutions\o365AuditLogs\Test0365AuditLogs\Test0365AuditLogs\O365ETL\obj\Debug\O365ETL.dll
+E:\Projects_2017\SolutionTemplate\Solutions\o365AuditLogs\Test0365AuditLogs\Test0365AuditLogs\O365ETL\obj\Debug\O365ETL.pdb
+E:\Projects_2017\SolutionTemplate\Solutions\o365AuditLogs\Test0365AuditLogs_MO\Test0365AuditLogs\O365ETL\bin\Debug\O365ETL.dll
+E:\Projects_2017\SolutionTemplate\Solutions\o365AuditLogs\Test0365AuditLogs_MO\Test0365AuditLogs\O365ETL\bin\Debug\O365ETL.pdb
+E:\Projects_2017\SolutionTemplate\Solutions\o365AuditLogs\Test0365AuditLogs_MO\Test0365AuditLogs\O365ETL\bin\Debug\Microsoft.IdentityModel.Clients.ActiveDirectory.dll
+E:\Projects_2017\SolutionTemplate\Solutions\o365AuditLogs\Test0365AuditLogs_MO\Test0365AuditLogs\O365ETL\bin\Debug\Microsoft.IdentityModel.Clients.ActiveDirectory.Platform.dll
+E:\Projects_2017\SolutionTemplate\Solutions\o365AuditLogs\Test0365AuditLogs_MO\Test0365AuditLogs\O365ETL\bin\Debug\Newtonsoft.Json.dll
+E:\Projects_2017\SolutionTemplate\Solutions\o365AuditLogs\Test0365AuditLogs_MO\Test0365AuditLogs\O365ETL\bin\Debug\Microsoft.IdentityModel.Clients.ActiveDirectory.pdb
+E:\Projects_2017\SolutionTemplate\Solutions\o365AuditLogs\Test0365AuditLogs_MO\Test0365AuditLogs\O365ETL\bin\Debug\Microsoft.IdentityModel.Clients.ActiveDirectory.xml
+E:\Projects_2017\SolutionTemplate\Solutions\o365AuditLogs\Test0365AuditLogs_MO\Test0365AuditLogs\O365ETL\bin\Debug\Microsoft.IdentityModel.Clients.ActiveDirectory.Platform.pdb
+E:\Projects_2017\SolutionTemplate\Solutions\o365AuditLogs\Test0365AuditLogs_MO\Test0365AuditLogs\O365ETL\bin\Debug\Microsoft.IdentityModel.Clients.ActiveDirectory.Platform.xml
+E:\Projects_2017\SolutionTemplate\Solutions\o365AuditLogs\Test0365AuditLogs_MO\Test0365AuditLogs\O365ETL\bin\Debug\Newtonsoft.Json.xml
+E:\Projects_2017\SolutionTemplate\Solutions\o365AuditLogs\Test0365AuditLogs_MO\Test0365AuditLogs\O365ETL\obj\Debug\O365ETL.csprojResolveAssemblyReference.cache
+E:\Projects_2017\SolutionTemplate\Solutions\o365AuditLogs\Test0365AuditLogs_MO\Test0365AuditLogs\O365ETL\obj\Debug\O365ETL.dll
+E:\Projects_2017\SolutionTemplate\Solutions\o365AuditLogs\Test0365AuditLogs_MO\Test0365AuditLogs\O365ETL\obj\Debug\O365ETL.pdb
+C:\Users\muali\Desktop\Test0365AuditLogs\O365ETL\bin\Debug\O365ETL.dll
+C:\Users\muali\Desktop\Test0365AuditLogs\O365ETL\bin\Debug\O365ETL.pdb
+C:\Users\muali\Desktop\Test0365AuditLogs\O365ETL\bin\Debug\Microsoft.IdentityModel.Clients.ActiveDirectory.dll
+C:\Users\muali\Desktop\Test0365AuditLogs\O365ETL\bin\Debug\Microsoft.IdentityModel.Clients.ActiveDirectory.Platform.dll
+C:\Users\muali\Desktop\Test0365AuditLogs\O365ETL\bin\Debug\Newtonsoft.Json.dll
+C:\Users\muali\Desktop\Test0365AuditLogs\O365ETL\bin\Debug\Microsoft.IdentityModel.Clients.ActiveDirectory.pdb
+C:\Users\muali\Desktop\Test0365AuditLogs\O365ETL\bin\Debug\Microsoft.IdentityModel.Clients.ActiveDirectory.xml
+C:\Users\muali\Desktop\Test0365AuditLogs\O365ETL\bin\Debug\Microsoft.IdentityModel.Clients.ActiveDirectory.Platform.pdb
+C:\Users\muali\Desktop\Test0365AuditLogs\O365ETL\bin\Debug\Microsoft.IdentityModel.Clients.ActiveDirectory.Platform.xml
+C:\Users\muali\Desktop\Test0365AuditLogs\O365ETL\bin\Debug\Newtonsoft.Json.xml
+C:\Users\muali\Desktop\Test0365AuditLogs\O365ETL\obj\Debug\O365ETL.csprojResolveAssemblyReference.cache
+C:\Users\muali\Desktop\Test0365AuditLogs\O365ETL\obj\Debug\O365ETL.dll
+C:\Users\muali\Desktop\Test0365AuditLogs\O365ETL\obj\Debug\O365ETL.pdb
+C:\Users\vsemmet\Dropbox (Neal Analytics)\Power BI Telemetry\Code\20170815 from Mo\Test0365AuditLogsFixed\O365ETL\bin\Debug\O365ETL.dll
+C:\Users\vsemmet\Dropbox (Neal Analytics)\Power BI Telemetry\Code\20170815 from Mo\Test0365AuditLogsFixed\O365ETL\bin\Debug\O365ETL.pdb
+C:\Users\vsemmet\Dropbox (Neal Analytics)\Power BI Telemetry\Code\20170815 from Mo\Test0365AuditLogsFixed\O365ETL\bin\Debug\Microsoft.IdentityModel.Clients.ActiveDirectory.dll
+C:\Users\vsemmet\Dropbox (Neal Analytics)\Power BI Telemetry\Code\20170815 from Mo\Test0365AuditLogsFixed\O365ETL\bin\Debug\Microsoft.IdentityModel.Clients.ActiveDirectory.Platform.dll
+C:\Users\vsemmet\Dropbox (Neal Analytics)\Power BI Telemetry\Code\20170815 from Mo\Test0365AuditLogsFixed\O365ETL\bin\Debug\Newtonsoft.Json.dll
+C:\Users\vsemmet\Dropbox (Neal Analytics)\Power BI Telemetry\Code\20170815 from Mo\Test0365AuditLogsFixed\O365ETL\bin\Debug\Microsoft.IdentityModel.Clients.ActiveDirectory.pdb
+C:\Users\vsemmet\Dropbox (Neal Analytics)\Power BI Telemetry\Code\20170815 from Mo\Test0365AuditLogsFixed\O365ETL\bin\Debug\Microsoft.IdentityModel.Clients.ActiveDirectory.xml
+C:\Users\vsemmet\Dropbox (Neal Analytics)\Power BI Telemetry\Code\20170815 from Mo\Test0365AuditLogsFixed\O365ETL\bin\Debug\Microsoft.IdentityModel.Clients.ActiveDirectory.Platform.pdb
+C:\Users\vsemmet\Dropbox (Neal Analytics)\Power BI Telemetry\Code\20170815 from Mo\Test0365AuditLogsFixed\O365ETL\bin\Debug\Microsoft.IdentityModel.Clients.ActiveDirectory.Platform.xml
+C:\Users\vsemmet\Dropbox (Neal Analytics)\Power BI Telemetry\Code\20170815 from Mo\Test0365AuditLogsFixed\O365ETL\bin\Debug\Newtonsoft.Json.xml
+C:\Users\vsemmet\Dropbox (Neal Analytics)\Power BI Telemetry\Code\20170815 from Mo\Test0365AuditLogsFixed\O365ETL\obj\Debug\O365ETL.csprojResolveAssemblyReference.cache
+C:\Users\vsemmet\Dropbox (Neal Analytics)\Power BI Telemetry\Code\20170815 from Mo\Test0365AuditLogsFixed\O365ETL\obj\Debug\O365ETL.dll
+C:\Users\vsemmet\Dropbox (Neal Analytics)\Power BI Telemetry\Code\20170815 from Mo\Test0365AuditLogsFixed\O365ETL\obj\Debug\O365ETL.pdb
+C:\Users\muali\Desktop\2017-08-15.1\Test0365AuditLogsFixed\O365ETL\bin\Debug\O365ETL.dll
+C:\Users\muali\Desktop\2017-08-15.1\Test0365AuditLogsFixed\O365ETL\bin\Debug\O365ETL.pdb
+C:\Users\muali\Desktop\2017-08-15.1\Test0365AuditLogsFixed\O365ETL\bin\Debug\Microsoft.IdentityModel.Clients.ActiveDirectory.dll
+C:\Users\muali\Desktop\2017-08-15.1\Test0365AuditLogsFixed\O365ETL\bin\Debug\Microsoft.IdentityModel.Clients.ActiveDirectory.Platform.dll
+C:\Users\muali\Desktop\2017-08-15.1\Test0365AuditLogsFixed\O365ETL\bin\Debug\Newtonsoft.Json.dll
+C:\Users\muali\Desktop\2017-08-15.1\Test0365AuditLogsFixed\O365ETL\bin\Debug\Microsoft.IdentityModel.Clients.ActiveDirectory.pdb
+C:\Users\muali\Desktop\2017-08-15.1\Test0365AuditLogsFixed\O365ETL\bin\Debug\Microsoft.IdentityModel.Clients.ActiveDirectory.xml
+C:\Users\muali\Desktop\2017-08-15.1\Test0365AuditLogsFixed\O365ETL\bin\Debug\Microsoft.IdentityModel.Clients.ActiveDirectory.Platform.pdb
+C:\Users\muali\Desktop\2017-08-15.1\Test0365AuditLogsFixed\O365ETL\bin\Debug\Microsoft.IdentityModel.Clients.ActiveDirectory.Platform.xml
+C:\Users\muali\Desktop\2017-08-15.1\Test0365AuditLogsFixed\O365ETL\bin\Debug\Newtonsoft.Json.xml
+C:\Users\muali\Desktop\2017-08-15.1\Test0365AuditLogsFixed\O365ETL\obj\Debug\O365ETL.csprojResolveAssemblyReference.cache
+C:\Users\muali\Desktop\2017-08-15.1\Test0365AuditLogsFixed\O365ETL\obj\Debug\O365ETL.dll
+C:\Users\muali\Desktop\2017-08-15.1\Test0365AuditLogsFixed\O365ETL\obj\Debug\O365ETL.pdb
