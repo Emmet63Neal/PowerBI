@@ -10,7 +10,49 @@ namespace O365ETL
 {
     public class SQLOperations
     {
-        public static void BulkInsert(string connString, DataTable table, string tableName)
+
+		public static string CreateTABLE(string tableName, DataTable table)
+		{
+			string sqlsc;
+			sqlsc = "CREATE TABLE " + tableName + "(";
+			for (int i = 0; i < table.Columns.Count; i++)
+			{
+				sqlsc += "\n [" + table.Columns[i].ColumnName + "] ";
+				string columnType = table.Columns[i].DataType.ToString();
+				switch (columnType)
+				{
+					case "System.Int32":
+						sqlsc += " int ";
+						break;
+					case "System.Int64":
+						sqlsc += " bigint ";
+						break;
+					case "System.Int16":
+						sqlsc += " smallint";
+						break;
+					case "System.Byte":
+						sqlsc += " tinyint";
+						break;
+					case "System.Decimal":
+						sqlsc += " decimal ";
+						break;
+					case "System.DateTime":
+						sqlsc += " datetime ";
+						break;
+					case "System.String":
+					default:
+						sqlsc += " nvarchar(max) ";
+						break;
+				}
+				if (table.Columns[i].AutoIncrement)
+					sqlsc += " IDENTITY(" + table.Columns[i].AutoIncrementSeed.ToString() + "," + table.Columns[i].AutoIncrementStep.ToString() + ") ";
+				if (!table.Columns[i].AllowDBNull)
+					sqlsc += " NOT NULL ";
+				sqlsc += ",";
+			}
+			return sqlsc.Substring(0, sqlsc.Length - 1) + "\n)";
+		}
+		public static void BulkInsert(string connString, DataTable table, string tableName)
         {
             try
             {
@@ -71,7 +113,7 @@ namespace O365ETL
                         DataSetTable.Rows.Add(AuditLogRowDataSet);
                     }
                     
-                    O365ETL.SQLOperations.BulkInsert(connstring, DataSetTable, schema + "." + "[staging_datasets]");
+                    O365ETL.SQLOperations.BulkInsert(connstring, DataSetTable, $"{schema}.[staging_datasets]");
                 }
 
                 AuditLogDataTable.Rows.Add(AuditLogRow);
