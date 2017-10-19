@@ -3,131 +3,208 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Dynamic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace O365ETL
 {
-    public class GetOfficeData
-    {
-        public static async Task GetContentPayloadAsync(string accessToken, string tenantId, DateTime start, string connstring, string schema)
-        {
-            DateTime end = start.AddDays(1);
+	public class GetOfficeData
+	{
+		public static async Task GetContentPayloadAsync(string accessToken, string tenantId, DateTime start, string connstring,
+			string schema)
+		{
+			DateTime end = start.AddDays(1);
 
-            HttpClient client = new HttpClient();
-            client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", accessToken);
+			HttpClient client = new HttpClient();
+			client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer",
+				accessToken);
 
-            string pageUri = $"https://manage.office.com/api/v1.0/{tenantId}/activity/feed/subscriptions/content?contentType=Audit.General&startTime={start.Date}&endTime={end.Date}";
-            do
-            {
-                HttpResponseMessage batchResponse = await client.GetAsync(pageUri);
-                var payloadRetrieved = await batchResponse.Content.ReadAsStringAsync();
+			string pageUri =
+				$"https://manage.office.com/api/v1.0/{tenantId}/activity/feed/subscriptions/content?contentType=Audit.General&startTime={start.Date}&endTime={end.Date}";
+			do
+			{
+				HttpResponseMessage batchResponse = await client.GetAsync(pageUri);
+				var payloadRetrieved = await batchResponse.Content.ReadAsStringAsync();
 
-                if (!batchResponse.IsSuccessStatusCode)
-                {
-                    throw new ApiFailure()
-                    {
-                        MainPayload = payloadRetrieved,
-                        RawResponse = batchResponse,
-                    };
-                }
+				if (!batchResponse.IsSuccessStatusCode)
+				{
+					throw new ApiFailure()
+					{
+						MainPayload = payloadRetrieved,
+						RawResponse = batchResponse,
+					};
+				}
 
-                var contentReturned = JsonConvert.DeserializeObject<List<Content>>(payloadRetrieved);
-                IEnumerable<String> values;
-                batchResponse.Headers.TryGetValues("nextpageUri", out values);
-                if (values != null)
-                {
-                    pageUri = (values as string[]).FirstOrDefault();
-                }
-                else
-                {
-                    pageUri = null;
-                }
+				var contentReturned = JsonConvert.DeserializeObject<List<Content>>(payloadRetrieved);
+				IEnumerable<String> values;
+				batchResponse.Headers.TryGetValues("nextpageUri", out values);
+				if (values != null)
+				{
+					pageUri = (values as string[]).FirstOrDefault();
+				}
+				else
+				{
+					pageUri = null;
+				}
+				
+				foreach (var content in contentReturned)
+				{
+					var dataTables = new List<DataTable>();
+					var dataResponse = await client.GetAsync(content.contentUri);
+					var dataResponsePayload = await dataResponse.Content.ReadAsStringAsync();
 
-                foreach (var content in contentReturned)
-                {
-                    var dataResponse = await client.GetAsync(content.contentUri);
-                    var dataResponsePayload = await dataResponse.Content.ReadAsStringAsync();
+					if (!dataResponse.IsSuccessStatusCode) // check if the httpclient success or not
+					{
+						var apiFailure = new ApiFailure()
+						{
+							MainPayload = payloadRetrieved,
+							RawResponse = batchResponse,
+							DataPayload = dataResponsePayload,
+						};
+						// We will not fail if the content payload his an error
+						Log(apiFailure, connstring, schema, start);
+					}
+					else
+					{
+						var deserializeObject = JsonConvert.DeserializeObject<List<ExpandoObject>>(dataResponsePayload);
+						dynamic firstRecord = deserializeObject.First();
+						List<object> recordList = new List<object>();
+						recordList.AddRange(deserializeObject);
 
-                    if (!dataResponse.IsSuccessStatusCode)// check if the httpclient success or not
-                    {
+						dataTables.AddRange(GetTableInfo(recordList, firstRecord.Workload, string.Empty, string.Empty));
+						
+						O365ETL.SQLOperations.InsertAuditLog(dataTables, connstring, schema);
+						//content.RecordCount = o365ETLSQLOperationsInsertAuditLog
+					}
 
-                        var apiFailure = new ApiFailure()
-                        {
-                            MainPayload = payloadRetrieved,
-                            RawResponse = batchResponse,
-                            DataPayload = dataResponsePayload,
-                        };
-                        // We will not fail if the content payload his an error
-                        Log(apiFailure, connstring, schema, start);
-                    }
-                    else
-                    {
-                        var contentReturnedAuditLog = JsonConvert.DeserializeObject<List<AuditLogJson>>(dataResponsePayload);
-                        content.RecordCount = O365ETL.SQLOperations.InsertAuditLog(contentReturnedAuditLog, connstring, schema, start.ToString("yyyyMMddHHmmss"), dataResponsePayload);
-                    }
-                }
+				}
 
-            } while (pageUri != null); // check if page is null then quit the loop
-        }
+			} while (pageUri != null); // check if page is null then quit the loop
+		}
 
-        public static async Task<bool> Process(string clientId, string clientSecret, string tenant, DateTime date, string connstring, string schema)
-        {
-            try
-            {
-                var token = await GetToken(clientId, clientSecret, tenant);
-                await O365ETL.GetOfficeData.GetContentPayloadAsync(token.AccessToken, tenant, date, connstring, schema);
-                Log(null, connstring, schema, date);
-            }
-            catch (Exception exception)
-            {
-                Log(exception, connstring, schema, date);
-                throw;
-            }
+		public static async Task<bool> Process(string clientId, string clientSecret, string tenant, DateTime date,
+			string connstring, string schema)
+		{
+			try
+			{
+				var token = await GetToken(clientId, clientSecret, tenant);
+				await O365ETL.GetOfficeData.GetContentPayloadAsync(token.AccessToken, tenant, date, connstring, schema);
+				Log(null, connstring, schema, date);
+			}
+			catch (Exception exception)
+			{
+				Log(exception, connstring, schema, date);
+				throw;
+			}
 
-            return true;
-        }
+			return true;
+		}
 
-        public static void Log(Exception exception, string connstring, string schema, DateTime date)
-        {
-            var errorDataTable = O365ETL.DataTables.GetErrorDataTable();
-            DataRow errorRow = errorDataTable.NewRow();
+		public static void Log(Exception exception, string connstring, string schema, DateTime date)
+		{
+			var errorDataTable = O365ETL.DataTables.GetErrorDataTable();
+			DataRow errorRow = errorDataTable.NewRow();
 
-            errorRow["BatchID"] = date.ToString("yyyyMMddHHmmss"); ;
-            errorRow["LogText"] = exception?.ToString();
-            errorRow["ExecutedBy"] = Environment.UserName;
-            errorRow["RecordCount"] = 0;
-            errorRow["EventStart"] = date;
-            errorRow["EventEnd"] = DateTime.UtcNow;
-            errorRow["Status"] = exception == null ? "Success" : "Fail";
-            if (exception != null && exception is ApiFailure)
-            {
-                ApiFailure apiFailure = exception as ApiFailure;
-                errorRow["BatchResponse"] = apiFailure.MainPayload;
-                errorRow["IndividualResponse"] = apiFailure.DataPayload;
-                errorRow["APIContentUri"] = apiFailure.RawResponse.RequestMessage.RequestUri;
-            }
-            errorRow["APIStartDate"] = date;
-            errorRow["APIEndDate"] = date.AddDays(1);
-            errorDataTable.Rows.Add(errorRow);
-            O365ETL.SQLOperations.BulkInsert(connstring, errorDataTable, schema + "." + "batch_log");
-        }
+			errorRow["BatchID"] = date.ToString("yyyyMMddHHmmss");
+			;
+			errorRow["LogText"] = exception?.ToString();
+			errorRow["ExecutedBy"] = Environment.UserName;
+			errorRow["RecordCount"] = 0;
+			errorRow["EventStart"] = date;
+			errorRow["EventEnd"] = DateTime.UtcNow;
+			errorRow["Status"] = exception == null ? "Success" : "Fail";
+			if (exception != null && exception is ApiFailure)
+			{
+				ApiFailure apiFailure = exception as ApiFailure;
+				errorRow["BatchResponse"] = apiFailure.MainPayload;
+				errorRow["IndividualResponse"] = apiFailure.DataPayload;
+				errorRow["APIContentUri"] = apiFailure.RawResponse.RequestMessage.RequestUri;
+			}
+			errorRow["APIStartDate"] = date;
+			errorRow["APIEndDate"] = date.AddDays(1);
+			errorDataTable.Rows.Add(errorRow);
+			O365ETL.SQLOperations.BulkInsert(connstring, errorDataTable, schema + "." + "batch_log");
+		}
 
-        public static async Task<AuthenticationResult> GetToken(string clientId, string clientSecret, string tenant)
-        {
-            string resourceUri = "https://manage.office.com";
-            string authorityUri = $"https://login.windows.net/{tenant}/oauth2/authorize";
+		public static async Task<AuthenticationResult> GetToken(string clientId, string clientSecret, string tenant)
+		{
+			string resourceUri = "https://manage.office.com";
+			string authorityUri = $"https://login.windows.net/{tenant}/oauth2/authorize";
 
-            AuthenticationContext authContext = new AuthenticationContext(authorityUri);
-            ClientCredential cred = new ClientCredential(clientId, clientSecret);
-            AuthenticationResult token = await authContext.AcquireTokenAsync(resourceUri, cred);
-            return token;
-        }
+			AuthenticationContext authContext = new AuthenticationContext(authorityUri);
+			ClientCredential cred = new ClientCredential(clientId, clientSecret);
+			AuthenticationResult token = await authContext.AcquireTokenAsync(resourceUri, cred);
+			return token;
+		}
 
-    }
 
-    public class Content
+		public static List<DataTable> GetTableInfo(List<object> records, string tableName, string fkName, string fk)
+		{
+			var dtList = new List<DataTable>();
+			var dt = new DataTable(tableName);
+			dtList.Add(dt);
+			IDictionary<string, Type> seenTypes = new Dictionary<string, Type>();
+			if (!String.IsNullOrEmpty(fkName))
+			{
+				dt.Columns.Add(fkName, typeof(string));
+			}
+
+			foreach (object record in records)
+			{
+				dynamic expando = (ExpandoObject)record;
+				var newTypes = GetMemberInfo(expando);
+				DataRow dr = dt.NewRow();
+				if (!String.IsNullOrEmpty(fk))
+					dr[fkName] = fk;
+				foreach (var newType in newTypes)
+				{
+					if (!seenTypes.ContainsKey(newType.Key))
+					{
+						if (newType.Value != typeof(List<object>))
+						{
+							seenTypes.Add(newType.Key, newType.Value);
+							dt.Columns.Add(newType.Key, newType.Value);
+						}
+						else
+						{
+							var newExpandoList = ((IDictionary<string, object>)expando)[newType.Key];
+							var subTables = GetTableInfo((List<object>)newExpandoList, $"{tableName}_{newType.Key}", tableName + "_id", expando.Id);
+							dtList.AddRange(subTables);
+							seenTypes.Add(newType.Key, typeof(List<Object>));
+						}
+
+					}
+					if (newType.Value != typeof(List<object>))
+					{
+						dr[newType.Key] = ((IDictionary<string, object>)expando)[newType.Key];
+					}
+				}
+				dt.Rows.Add(dr);
+			}
+
+
+			return dtList;
+		}
+		public static IDictionary<string, Type> GetMemberInfo(ExpandoObject target)
+		{
+			var tList = new List<string>();
+			var memberInfos = new Dictionary<string, Type>();
+			tList.AddRange(((IDynamicMetaObjectProvider)target).GetMetaObject(Expression.Constant(target)).GetDynamicMemberNames());
+			foreach (var item in tList)
+			{
+				if (memberInfos.ContainsKey(item)) continue;
+				memberInfos.Add(item, ((IDictionary<string, object>)target)[item].GetType());
+			}
+
+			return memberInfos;
+		}
+
+	}
+
+	public class Content
     {
         public string contentCreated { get; set; }
 

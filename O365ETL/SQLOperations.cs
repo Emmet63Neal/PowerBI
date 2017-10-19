@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.Odbc;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -11,10 +12,10 @@ namespace O365ETL
     public class SQLOperations
     {
 
-		public static string CreateTABLE(string tableName, DataTable table)
+		public static void CreateTABLE(string connectionString, string schema, string tableName, DataTable table)
 		{
 			string sqlsc;
-			sqlsc = "CREATE TABLE " + tableName + "(";
+			sqlsc = $"CREATE TABLE {schema}.{tableName}(";
 			for (int i = 0; i < table.Columns.Count; i++)
 			{
 				sqlsc += "\n [" + table.Columns[i].ColumnName + "] ";
@@ -50,8 +51,41 @@ namespace O365ETL
 					sqlsc += " NOT NULL ";
 				sqlsc += ",";
 			}
-			return sqlsc.Substring(0, sqlsc.Length - 1) + "\n)";
+			var sql = sqlsc.Substring(0, sqlsc.Length - 1) + "\n)";
+			using (var connection = new SqlConnection(connectionString))
+			{
+				connection.Open();
+				using (var cmd = connection.CreateCommand())
+				{
+					cmd.CommandText = sql;
+					cmd.ExecuteNonQuery();
+				}
+			}
 		}
+
+	    public static bool TableExists(string connectionString, string tableName)
+	    {
+			bool exists;
+
+		    try
+		    {
+			    using (var sqlConnection = new SqlConnection(connectionString))
+			    {
+					sqlConnection.Open();
+				    SqlCommand cmd = sqlConnection.CreateCommand();
+				    cmd.CommandText = "select case when exists((select * from information_schema.tables where table_name = '" +
+				                      tableName +
+				                      "')) then 1 else 0 end";
+				    exists = (int) cmd.ExecuteScalar() == 1;
+			    }
+		    }
+		    catch
+		    {
+			    exists = false;
+		    }
+		    return exists;
+	    }
+
 		public static void BulkInsert(string connString, DataTable table, string tableName)
         {
             try
@@ -84,7 +118,25 @@ namespace O365ETL
             }
         }
 
-        public static int InsertAuditLog(List<AuditLogJson> contentReturnedAuditLog, string connstring, string schema, string date, string response2Payload)
+	    public static void InsertAuditLog(List<DataTable> dataTables, string connstring, string schema)
+	    {
+			foreach (DataTable dataTable in dataTables)
+			{
+				var stagingTableName = $"staging_{dataTable.TableName}";
+				var productionTableName = dataTable.TableName;
+				if(!SQLOperations.TableExists(connstring, stagingTableName))
+				{
+					SQLOperations.CreateTABLE(connstring, schema, stagingTableName, dataTable);
+				}
+				if (!SQLOperations.TableExists(connstring, productionTableName))
+				{
+					SQLOperations.CreateTABLE(connstring, schema, productionTableName, dataTable);
+				}
+				BulkInsert(connstring, dataTable, schema + "." + stagingTableName);
+			}
+		}
+
+	    public static int InsertAuditLog(List<AuditLogJson> contentReturnedAuditLog, string connstring, string schema, string date, string response2Payload)
         {
             int count = 0;
             var AuditLogDataTable = O365ETL.DataTables.GetAuditLogDataTable();

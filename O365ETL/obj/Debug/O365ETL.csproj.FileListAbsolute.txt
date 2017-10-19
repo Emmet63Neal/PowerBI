@@ -76,3 +76,16 @@ C:\Users\muali\Desktop\2017-08-15.1\Test0365AuditLogsFixed\O365ETL\bin\Debug\New
 C:\Users\muali\Desktop\2017-08-15.1\Test0365AuditLogsFixed\O365ETL\obj\Debug\O365ETL.csprojResolveAssemblyReference.cache
 C:\Users\muali\Desktop\2017-08-15.1\Test0365AuditLogsFixed\O365ETL\obj\Debug\O365ETL.dll
 C:\Users\muali\Desktop\2017-08-15.1\Test0365AuditLogsFixed\O365ETL\obj\Debug\O365ETL.pdb
+C:\Users\xbox\Source\Repos\O365AuditEtlNeal\O365ETL\bin\Debug\O365ETL.dll
+C:\Users\xbox\Source\Repos\O365AuditEtlNeal\O365ETL\bin\Debug\O365ETL.pdb
+C:\Users\xbox\Source\Repos\O365AuditEtlNeal\O365ETL\bin\Debug\Microsoft.IdentityModel.Clients.ActiveDirectory.dll
+C:\Users\xbox\Source\Repos\O365AuditEtlNeal\O365ETL\bin\Debug\Microsoft.IdentityModel.Clients.ActiveDirectory.Platform.dll
+C:\Users\xbox\Source\Repos\O365AuditEtlNeal\O365ETL\bin\Debug\Newtonsoft.Json.dll
+C:\Users\xbox\Source\Repos\O365AuditEtlNeal\O365ETL\bin\Debug\Microsoft.IdentityModel.Clients.ActiveDirectory.pdb
+C:\Users\xbox\Source\Repos\O365AuditEtlNeal\O365ETL\bin\Debug\Microsoft.IdentityModel.Clients.ActiveDirectory.xml
+C:\Users\xbox\Source\Repos\O365AuditEtlNeal\O365ETL\bin\Debug\Microsoft.IdentityModel.Clients.ActiveDirectory.Platform.pdb
+C:\Users\xbox\Source\Repos\O365AuditEtlNeal\O365ETL\bin\Debug\Microsoft.IdentityModel.Clients.ActiveDirectory.Platform.xml
+C:\Users\xbox\Source\Repos\O365AuditEtlNeal\O365ETL\bin\Debug\Newtonsoft.Json.xml
+C:\Users\xbox\Source\Repos\O365AuditEtlNeal\O365ETL\obj\Debug\O365ETL.csprojResolveAssemblyReference.cache
+C:\Users\xbox\Source\Repos\O365AuditEtlNeal\O365ETL\obj\Debug\O365ETL.dll
+C:\Users\xbox\Source\Repos\O365AuditEtlNeal\O365ETL\obj\Debug\O365ETL.pdb
