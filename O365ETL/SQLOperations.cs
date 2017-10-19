@@ -132,48 +132,8 @@ namespace O365ETL
 				{
 					SQLOperations.CreateTABLE(connstring, schema, productionTableName, dataTable);
 				}
-				BulkInsert(connstring, dataTable, schema + "." + stagingTableName);
+				BulkInsert(connstring, dataTable, $"{schema}.{stagingTableName}");
 			}
 		}
-
-	    public static int InsertAuditLog(List<AuditLogJson> contentReturnedAuditLog, string connstring, string schema, string date, string response2Payload)
-        {
-            int count = 0;
-            var AuditLogDataTable = O365ETL.DataTables.GetAuditLogDataTable();
-
-            foreach (var data in contentReturnedAuditLog)
-            {
-                count++;
-                DataRow AuditLogRow = AuditLogDataTable.NewRow();
-
-                AuditLogRow["Id"] = data.Id ?? "";
-                AuditLogRow["RecordType"] = data.RecordType;
-                AuditLogRow["CreationTime"] = data.CreationTime ?? "";
-                AuditLogRow["UserType"] = data.UserType;
-                AuditLogRow["UserKey"] = data.UserKey ?? "";
-                AuditLogRow["JSONPayload"] = response2Payload;
-                AuditLogRow["BatchId"] = date;
-
-                if (data.Datasets != null)
-                {
-                    var DataSetTable = O365ETL.DataTables.GetDatasetDataTable();
-                    foreach (var data1 in data.Datasets)
-                    {
-                        DataRow AuditLogRowDataSet = DataSetTable.NewRow();
-                        AuditLogRowDataSet["DatasetId"] = data1.DatasetId ?? "";
-                        AuditLogRowDataSet["DatasetName"] = data1.DatasetName ?? "";
-                        DataSetTable.Rows.Add(AuditLogRowDataSet);
-                    }
-                    
-                    O365ETL.SQLOperations.BulkInsert(connstring, DataSetTable, $"{schema}.[staging_datasets]");
-                }
-
-                AuditLogDataTable.Rows.Add(AuditLogRow);
-            }
-
-            O365ETL.SQLOperations.BulkInsert(connstring, AuditLogDataTable, schema + "." + "[staging_audit_data]");
-
-            return count;
-        }
     }   
 }

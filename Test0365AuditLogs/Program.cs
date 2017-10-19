@@ -25,17 +25,15 @@ namespace Test0365AuditLogs
 		        DateTime dateToProcess = DateTime.UtcNow.AddDays(-1*i);
 		        try
 		        {
-					  Console.WriteLine("Processing " + dateToProcess);
+			        Console.WriteLine("Processing " + dateToProcess);
 			        var result =
 				        O365ETL.GetOfficeData.Process(clientId, clientSecret, tenant, dateToProcess, connstring, schema).Result;
 		        }
-		        catch (Exception ex)
+		        catch
 		        {
-						Console.WriteLine(ex.Message);
 		        }
-
 	        }
-	        O365ETL.SQLOperations.RunStoredProc(connstring, schema + ".uspMoveStagingToAuditLog");
+	        O365ETL.SQLOperations.RunStoredProc(connstring, schema + ".uspMoveStagingToPowerBI");
         }
     }
 }

@@ -74,12 +74,9 @@ namespace O365ETL
 						List<object> recordList = new List<object>();
 						recordList.AddRange(deserializeObject);
 
-						dataTables.AddRange(GetTableInfo(recordList, firstRecord.Workload, string.Empty, string.Empty));
-						
+						dataTables.AddRange(GetTableInfo(recordList, firstRecord.Workload, string.Empty, string.Empty, start.ToString("yyyyMMddHHmmss")));
 						O365ETL.SQLOperations.InsertAuditLog(dataTables, connstring, schema);
-						//content.RecordCount = o365ETLSQLOperationsInsertAuditLog
 					}
-
 				}
 
 			} while (pageUri != null); // check if page is null then quit the loop
@@ -141,7 +138,7 @@ namespace O365ETL
 		}
 
 
-		public static List<DataTable> GetTableInfo(List<object> records, string tableName, string fkName, string fk)
+		public static List<DataTable> GetTableInfo(List<object> records, string tableName, string fkName, string fk, string batchId)
 		{
 			var dtList = new List<DataTable>();
 			var dt = new DataTable(tableName);
@@ -150,6 +147,11 @@ namespace O365ETL
 			if (!String.IsNullOrEmpty(fkName))
 			{
 				dt.Columns.Add(fkName, typeof(string));
+				
+			}
+			else
+			{
+				dt.Columns.Add("BatchId", typeof(string));
 			}
 
 			foreach (object record in records)
@@ -159,6 +161,10 @@ namespace O365ETL
 				DataRow dr = dt.NewRow();
 				if (!String.IsNullOrEmpty(fk))
 					dr[fkName] = fk;
+				else
+				{
+					dr["BatchId"] = batchId;
+				}
 				foreach (var newType in newTypes)
 				{
 					if (!seenTypes.ContainsKey(newType.Key))
@@ -171,7 +177,7 @@ namespace O365ETL
 						else
 						{
 							var newExpandoList = ((IDictionary<string, object>)expando)[newType.Key];
-							var subTables = GetTableInfo((List<object>)newExpandoList, $"{tableName}_{newType.Key}", tableName + "_id", expando.Id);
+							var subTables = GetTableInfo((List<object>)newExpandoList, $"{tableName}_{newType.Key}", tableName + "_id", expando.Id, string.Empty);
 							dtList.AddRange(subTables);
 							seenTypes.Add(newType.Key, typeof(List<Object>));
 						}
